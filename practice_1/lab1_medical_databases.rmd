@@ -433,14 +433,14 @@ paste("Logistic Regression Area under ROC Curve: ", round(logitAUC,3))
 ```
 
 ```{r ,fig.align="center"}
-xgb.probs$Actual = test$NoShow.numerical
-xgb.probs$ActualClass = test$NoShow
-xgb.probs$PredictedClass = xgb.pred
-xgb.probs$Match = ifelse(xgb.probs$ActualClass == xgb.probs$PredictedClass,
+logit.probs$Actual = test$NoShow.numerical
+logit.probs$ActualClass = test$NoShow
+logit.probs$PredictedClass = xgb.pred
+logit.probs$Match = ifelse(logit.probs$ActualClass == logit.probs$PredictedClass,
                          "Correct","Incorrect")
 # [4.8] Plot Accuracy
-xgb.probs$Match = factor(xgb.probs$Match,levels=c("Incorrect","Correct"))
-ggplot(xgb.probs,aes(x=Yes,y=Actual,color=Match))+
+logit.probs$Match = factor(logit.probs$Match,levels=c("Incorrect","Correct"))
+ggplot(logit.probs,aes(x=Yes,y=Actual,color=Match))+
   geom_jitter(alpha=0.2,size=0.25)+
   scale_color_manual(values=c("grey40","orangered"))+
   ggtitle("Visualizing Model Performance", "(Dust Plot)")
